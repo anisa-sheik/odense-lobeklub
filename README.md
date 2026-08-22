@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Odense Løbeklub — Offentlig Foreningsportal
 
-## Getting Started
+Velkommen til Odense Løbeklubs officielle foreningsportal. Dette referenceprojekt demonstrerer en moderne, tilgængelig og SEO-venlig webfront til en lokal løbeklub med funktioner til nyheder, events, tilmelding og kontakt.
 
-First, run the development server:
+Hovedfunktioner
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Forside med klubintroduktion, overblik over kommende events og seneste nyheder.
+- Nyhedssektion med dynamisk server-side rendering (SSR) for hver artikel, så artikler er SEO-venlige og kan deles individuelt.
+- Eventkalender med individuelle tilmeldingsformularer per event.
+- Kontaktside med beskedformular til bestyrelsen.
+
+Teknologier
+
+- Next.js (App Router)
+- TypeScript
+- Tailwind CSS
+- Vitest + Testing Library (enhedstest og komponenttest)
+
+Kom godt i gang
+
+Forudsætning: Node.js og NPM installeret.
+
+1. Installer afhængigheder:
+
+```powershell
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Kør udviklings-serveren:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```powershell
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Åbn `http://localhost:3000` i din browser.
 
-## Learn More
+Byg og kør i produktion
 
-To learn more about Next.js, take a look at the following resources:
+```powershell
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Test
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Projektet bruger Vitest med `jsdom` til komponent- og enhedstest. Kør testene med:
 
-## Deploy on Vercel
+```powershell
+npm test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Eller direkte med Vitest (eksplicit jsdom):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```powershell
+npx vitest --environment jsdom --run
+```
+
+Watch-tilstand under udvikling:
+
+```powershell
+npm run test:watch
+```
+
+Lint
+
+```powershell
+npm run lint
+```
+
+Vigtige filer og struktur
+
+- Forside: [app/page.tsx](app/page.tsx)
+- Layout & navigation: [app/layout.tsx](app/layout.tsx)
+- Nyheder: [app/news](app/news)
+- Events & tilmelding: [app/events](app/events)
+- Kontakt: [app/contact](app/contact)
+
+Vil du have CI (GitHub Actions) til automatisk at køre tests på push/PR, kan jeg oprette en workflow for dig.

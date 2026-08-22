@@ -1,69 +1,80 @@
-import Image from "next/image";
+import Link from "next/link";
+import { news, events } from "../lib/data";
+
+export const metadata = {
+  title: "Odense Løbeklub - Foreningsportal",
+  description: "Velkommen til Odense Løbeklub — nyheder, events og kontakt.",
+  openGraph: {
+    title: "Odense Løbeklub",
+    description: "Velkommen til Odense Løbeklub — nyheder, events og kontakt.",
+    url: "https://example.com",
+    images: [{ url: "/file.svg", alt: "Odense Løbeklub" }],
+  },
+};
 
 export default function Home() {
+  const upcoming = events.slice(0, 3);
+  const latest = news.slice(0, 3);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="mx-auto w-full max-w-5xl">
+      <section className="rounded-2xl card p-8 shadow-2xl border-transparent">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <h1 className="text-4xl font-extrabold text-white">Velkommen til Odense Løbeklub</h1>
+            <p className="mt-3 text-lg text-[var(--muted)] max-w-xl">
+              Vi er en lokal løbeklub i Odense for alle niveauer — fra begyndere til erfarne
+              konkurrenceatleter. Her finder du nyheder, kommende events og muligheder for
+              tilmelding.
+            </p>
+            <div className="mt-6 flex gap-3">
+              <Link href="/events" className="rounded-xl bg-[var(--accent)] px-4 py-2 text-black font-semibold shadow-lg hover:brightness-105 focus:outline-none focus:ring-4 focus:ring-[rgba(255,122,24,0.18)]">Se kommende events</Link>
+              <Link href="/news" className="rounded-xl border border-white/6 px-4 py-2 text-white hover:bg-white/5 focus:outline-none focus:ring-4 focus:ring-[rgba(102,255,153,0.08)]">Læs nyheder</Link>
+            </div>
+          </div>
+          <div className="hidden md:block w-48 h-40 rounded-xl bg-gradient-to-tr from-[rgba(255,122,24,0.12)] to-transparent shadow-inner"></div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <section className="mt-8 grid gap-6 md:grid-cols-2">
+        <div className="rounded-xl card p-6 shadow-xl transition hover:translate-y-[-2px]">
+          <h2 className="text-2xl font-semibold text-white">Kommende events</h2>
+          <ul className="mt-4 space-y-4">
+            {upcoming.map((ev) => (
+              <li key={ev.id} className="flex flex-col">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-medium text-white">{ev.title}</h3>
+                    <p className="text-sm text-[var(--muted)]">{ev.date} — {ev.location}</p>
+                  </div>
+                  <Link href={`/events#event-${ev.id}`} className="ml-4 rounded-full bg-[var(--accent)] px-3 py-1 text-sm font-semibold text-black shadow">Tilmeld</Link>
+                </div>
+                <p className="mt-2 text-sm text-[var(--muted)]">{ev.description}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4">
+            <Link href="/events" className="text-sm font-medium text-[var(--accent)] hover:underline">Se alle events</Link>
+          </div>
         </div>
-      </main>
+
+        <div className="rounded-xl card p-6 shadow-xl">
+          <h2 className="text-2xl font-semibold text-white">Seneste nyheder</h2>
+          <ul className="mt-4 space-y-4">
+            {latest.map((item) => (
+              <li key={item.slug}>
+                <Link href={`/news/${item.slug}`} className="group block">
+                  <h3 className="font-medium text-white group-hover:text-[var(--accent)]">{item.title}</h3>
+                  <p className="text-sm text-[var(--muted)]">{item.date} — {item.excerpt}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4">
+            <Link href="/news" className="text-sm font-medium text-[var(--accent)] hover:underline">Se alle nyheder</Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
