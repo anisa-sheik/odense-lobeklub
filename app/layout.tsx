@@ -24,7 +24,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="da"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex min-h-screen flex-col bg-[var(--background)] text-[var(--foreground)]">
+      <body className="min-h-full flex min-h-screen flex-col bg-slate-900 bg-[var(--background)] text-[var(--foreground)]">
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-white/5 p-2 rounded shadow-md text-[var(--foreground)]">
           Spring til indhold
         </a>

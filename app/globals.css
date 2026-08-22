@@ -10,20 +10,23 @@
   --accent-2: #66ff99; /* neon green alternative accent */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #f8fafc;
-    --surface: #ffffff;
-    --foreground: #0b1220;
-    --muted: #6b7280;
-    --accent: #ff7a18;
-    --accent-2: #059669;
-  }
+html {
+  color-scheme: dark;
+}
+
+/* Keep a dark-first theme regardless of device preference */
+:root {
+  --background: #071023; /* deep navy */
+  --surface: #0b1220; /* card surface */
+  --foreground: #e6eef6; /* soft white */
+  --muted: #9aa6b2; /* muted text */
+  --accent: #ff7a18; /* energetic orange accent */
+  --accent-2: #66ff99; /* neon green alternative accent */
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
